@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Architecture_components</string>
+    <string name="priority">1</string>
+    <string name="mydescription">Description</string>
+    <string name="mytitle">title</string>
+</resources>
