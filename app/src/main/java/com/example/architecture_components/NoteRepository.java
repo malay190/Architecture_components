@@ -4,8 +4,6 @@ import android.app.Application;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
-import androidx.room.Delete;
-import androidx.room.Update;
 
 import java.util.List;
 
@@ -20,7 +18,7 @@ public class NoteRepository {
     }
 
     public void insert(Note note){
-        new InsertNotesAsyncTask(noteDao).execute(note);
+        new InsertNotesAsyncTask(noteDao).execute(note);  //created because Room don't allow database operation in the main thread.
 
     }
 
@@ -43,6 +41,9 @@ public class NoteRepository {
     }
 
 
+    //AsyncTask enables proper and easy use of the UI thread. This class allows you to perform background operations
+    // and publish results on the UI thread without having to manipulate threads and/or handlers.
+    // AsyncTasks should ideally be used for short operations (a few seconds at the most.)
     private static class InsertNotesAsyncTask extends AsyncTask<Note, Void, Void>{
         private NoteDao noteDao;
 

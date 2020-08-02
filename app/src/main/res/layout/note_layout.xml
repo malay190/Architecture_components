@@ -30,9 +30,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@string/mytitle"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-
-            />
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <TextView
             android:id="@+id/text_view_description"

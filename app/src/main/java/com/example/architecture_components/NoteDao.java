@@ -9,6 +9,10 @@ import androidx.room.Update;
 
 import java.util.List;
 
+
+//Marks the class as a Data Access Object.
+//Data Access Objects are the main classes where you define your database interactions.
+// They can include a variety of query methods.
 @Dao
 public interface NoteDao {
     @Insert
@@ -26,3 +30,6 @@ public interface NoteDao {
     @Query("SELECT * FROM note_table ORDER BY priority DESC")
     LiveData<List<Note>> getAllNOtes();
 }
+
+//The class marked with @Dao should either be an interface or an abstract class.
+// At compile time, Room will generate an implementation of this class when it is referenced by a Database.

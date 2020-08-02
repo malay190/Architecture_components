@@ -11,8 +11,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.NumberPicker;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Objects;
 
 public class Add_Edit_note extends AppCompatActivity {
     public static final String EXTRA_ID =
@@ -25,8 +26,8 @@ public class Add_Edit_note extends AppCompatActivity {
             "com.example.architecture_components.EXTRA_PRIORITY";
 
 
-    EditText edittitle;
-    EditText editdescription;
+    EditText editTitle;
+    EditText editDescription;
     NumberPicker numberPicker;
 
 
@@ -35,17 +36,20 @@ public class Add_Edit_note extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_note);
-        edittitle = (EditText) findViewById(R.id.edit_text_title);
-        editdescription = (EditText) findViewById(R.id.edit_text_description);
-        numberPicker = (NumberPicker) findViewById(R.id.number_picker);
+        editTitle =  findViewById(R.id.edit_text_title);
+        editDescription = findViewById(R.id.edit_text_description);
+        numberPicker = findViewById(R.id.number_picker);
 
         numberPicker.setMaxValue(10);
-        numberPicker.setMinValue(0);
+        numberPicker.setMinValue(1);
+
+        Objects.requireNonNull(getSupportActionBar()).setHomeAsUpIndicator(R.drawable.ic_close);
+        setTitle("Add Note");
     }
 
-    private void savenote(){
-        String title = edittitle.getText().toString();
-        String description = editdescription.getText().toString();
+    private void saveNote(){
+        String title = editTitle.getText().toString();
+        String description = editDescription.getText().toString();
         int priority = numberPicker.getValue();
 
         if (title.trim().isEmpty() || description.trim().isEmpty()) {
@@ -71,7 +75,7 @@ public class Add_Edit_note extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.save_note:
-                savenote();
+                saveNote();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
