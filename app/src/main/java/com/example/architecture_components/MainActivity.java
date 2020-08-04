@@ -102,14 +102,11 @@ public class MainActivity extends AppCompatActivity {
             noteViewModel.insert(note);
 
             Toast.makeText(this, "Note saved", Toast.LENGTH_SHORT).show();
-        } else if (requestCode == EDIT_NOTE_REQUEST && resultCode == RESULT_OK) {
-            int id = data.getIntExtra(Add_Edit_note.EXTRA_ID, -1);
-            if (id == -1) {
-                Toast.makeText(this, "Note can't be updated", Toast.LENGTH_SHORT).show();
-            }
+        } else
+            Toast.makeText(this, "Note not saved", Toast.LENGTH_SHORT).show();
         }
 
-    }
+    /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();

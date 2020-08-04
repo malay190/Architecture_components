@@ -36,7 +36,7 @@ public class Add_Edit_note extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_note);
-        editTitle =  findViewById(R.id.edit_text_title);
+        editTitle = findViewById(R.id.edit_text_title);
         editDescription = findViewById(R.id.edit_text_description);
         numberPicker = findViewById(R.id.number_picker);
 
@@ -47,7 +47,7 @@ public class Add_Edit_note extends AppCompatActivity {
         setTitle("Add Note");
     }
 
-    private void saveNote(){
+    private void saveNote() {
         String title = editTitle.getText().toString();
         String description = editDescription.getText().toString();
         int priority = numberPicker.getValue();
@@ -67,13 +67,13 @@ public class Add_Edit_note extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = new MenuInflater(this);
-        menuInflater.inflate(R.menu.menu,menu);
+        menuInflater.inflate(R.menu.menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.save_note:
                 saveNote();
                 return true;
