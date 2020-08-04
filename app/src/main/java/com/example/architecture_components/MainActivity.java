@@ -58,12 +58,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*new ItemTouchHelper(new ItemTouchHelper.Callback() {
-            @Override
-            public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
-                 return makeFlag(ItemTouchHelper.LEFT,0);
-            }
-
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
                 return false;
@@ -72,11 +67,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 noteViewModel.delete(noteAdapter.getNoteAt(viewHolder.getAdapterPosition()));
-                Toast.makeText(MainActivity.this,"  Note Deleted", Toast.LENGTH_LONG);
-
+                Toast.makeText(MainActivity.this, "Note Deleted", Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);
 
+        /*
         noteAdapter.setOnItemClickListener(new NoteAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Note note) {
@@ -106,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Note not saved", Toast.LENGTH_SHORT).show();
         }
 
-    /*
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
@@ -114,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    /*@Override
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.Delete_all_notes:
@@ -124,6 +119,6 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }*/
+    }
 
 }
