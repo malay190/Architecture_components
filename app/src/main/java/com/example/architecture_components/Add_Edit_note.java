@@ -44,7 +44,16 @@ public class Add_Edit_note extends AppCompatActivity {
         numberPicker.setMinValue(1);
 
         Objects.requireNonNull(getSupportActionBar()).setHomeAsUpIndicator(R.drawable.ic_close);
-        setTitle("Add Note");
+        Intent intent = getIntent();
+        if(intent.hasExtra(EXTRA_ID)){
+            setTitle("Edit Note");
+            editTitle.setText(intent.getStringExtra(EXTRA_TITLE));
+            editDescription.setText(intent.getStringExtra(EXTRA_DESCRIPTION));
+            numberPicker.setValue(intent.getIntExtra(EXTRA_PRIORITY,1));
+        }else{
+            setTitle("Add Note");
+        }
+
     }
 
     private void saveNote() {
@@ -60,6 +69,11 @@ public class Add_Edit_note extends AppCompatActivity {
         data.putExtra(EXTRA_TITLE, title);
         data.putExtra(EXTRA_DESCRIPTION, description);
         data.putExtra(EXTRA_PRIORITY, priority);
+        int id = getIntent().getIntExtra(EXTRA_ID,-1);
+
+        if (id != -1) {
+            data.putExtra(EXTRA_ID, id);
+        }
         setResult(RESULT_OK, data);
         finish();
     }

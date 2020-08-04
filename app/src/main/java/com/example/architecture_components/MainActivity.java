@@ -22,8 +22,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-   public static final int ADD_NOTE_REQUEST = 1;
-   public static final int EDIT_NOTE_REQUEST = 2;
+    public static final int ADD_NOTE_REQUEST = 1;
+    public static final int EDIT_NOTE_REQUEST = 2;
 
     private NoteViewModel noteViewModel;
 
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
                 return false;
@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }).attachToRecyclerView(recyclerView);
 
-        /*
         noteAdapter.setOnItemClickListener(new NoteAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Note note) {
@@ -82,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(Add_Edit_note.EXTRA_PRIORITY, note.getPriority());
                 startActivityForResult(intent, EDIT_NOTE_REQUEST);
             }
-        });*/
+        });
     }
 
 
@@ -97,9 +96,23 @@ public class MainActivity extends AppCompatActivity {
             noteViewModel.insert(note);
 
             Toast.makeText(this, "Note saved", Toast.LENGTH_SHORT).show();
+        } else if (requestCode == EDIT_NOTE_REQUEST && resultCode == RESULT_OK) {
+            int id = data.getIntExtra(Add_Edit_note.EXTRA_ID, -1);
+            if (id == -1) {
+                Toast.makeText(this, "Note can't be updated", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            String title = data.getStringExtra(Add_Edit_note.EXTRA_TITLE);
+            String description = data.getStringExtra(Add_Edit_note.EXTRA_DESCRIPTION);
+            int priority = data.getIntExtra(Add_Edit_note.EXTRA_PRIORITY, 1);
+            Note note = new Note(title, description, priority);
+            note.setId(id);
+            noteViewModel.update(note);
+            Toast.makeText(this, "Note updated", Toast.LENGTH_SHORT).show();
+
         } else
             Toast.makeText(this, "Note not saved", Toast.LENGTH_SHORT).show();
-        }
+    }
 
 
     @Override
